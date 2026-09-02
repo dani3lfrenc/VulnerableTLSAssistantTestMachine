@@ -7,8 +7,8 @@ The TLSAssistant Testbed is an open source tool for automatically configuring va
 The easiest and recommended way to run the testbed is to use the pre-built Docker image published on GitHub Container Registry:
 
 ```bash
-docker pull ghcr.io/stfbk/tlsassistant-testbed:v2.1.1
-docker run -p 9000-9010:9000-9010 ghcr.io/stfbk/tlsassistant-testbed:v2.1.1
+docker pull ghcr.io/stfbk/tlsassistant-testbed:v2.1.2
+docker run -p 9000-9010:9000-9010 ghcr.io/stfbk/tlsassistant-testbed:v2.1.2
 ```
 
 If you cannot use the released image, the next best option is to [build the Docker image locally](#2-build-the-docker-image-locally). Only [build and run on the host](#3-build-and-run-on-the-host) if Docker is not an option.
@@ -20,8 +20,8 @@ If you cannot use the released image, the next best option is to [build the Dock
 Pull and run the latest released image from GitHub Container Registry:
 
 ```bash
-docker pull ghcr.io/stfbk/tlsassistant-testbed:v2.1.1
-docker run -p 9000-9010:9000-9010 ghcr.io/stfbk/tlsassistant-testbed:v2.1.1
+docker pull ghcr.io/stfbk/tlsassistant-testbed:v2.1.2
+docker run -p 9000-9010:9000-9010 ghcr.io/stfbk/tlsassistant-testbed:v2.1.2
 ```
 
 ### 2. Build the Docker image locally
