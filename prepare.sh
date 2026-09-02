@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 RED='\033[0;31m'
@@ -8,10 +10,13 @@ NC='\033[0m' # No Color
 echo -e "${GREEN}[+][+][+][+] Start setup of the virtual machine... [+][+][+][+]${NC}"
 
 apt-get update
-apt-get -y install build-essential libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev libgd-dev libxml2 libxml2-dev uuid-dev git docker.io
-apt install -y aha html2text libxml2-utils pandoc dos2unix python-pip libexpat1-dev geany
-pip install --pre tlslite-ng
+apt-get -y install build-essential libpcre3 libpcre3-dev zlib1g zlib1g-dev libssl-dev libgd-dev libxml2 libxml2-dev uuid-dev git
+apt install -y aha html2text libxml2-utils pandoc dos2unix libexpat1-dev
 
+# the following dependencies are only needed if the DamnVulnerableOpenSSL Docker
+# path is re-enabled later (now commented out).
+# apt install -y docker.io python-pip
+# pip install --pre tlslite-ng
 
 echo -e "${GREEN}[+][+][+][+] DOWNLOADING NGINX VERSION 1.9.0 [+][+][+][+]${NC}"
 wget http://nginx.org/download/nginx-1.9.0.tar.gz

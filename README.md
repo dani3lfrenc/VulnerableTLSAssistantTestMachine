@@ -1,17 +1,66 @@
 # TLSAssistant Testbed
 
-The TLSAssistant Testbed is an open source code for automatically configuring various vulnerable webservers for the purpose of testing TLSAssistant analysis modules.
+The TLSAssistant Testbed is an open source tool for automatically configuring various vulnerable web servers. It is used to test the analysis modules of [TLSAssistant](https://github.com/stfbk/tlsassistant) against a wide range of known TLS vulnerabilities.
+
+## Quick start
+
+The easiest and recommended way to run the testbed is to use the pre-built Docker image published on GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/stfbk/tlsassistant-testbed:v2.1.1
+docker run -p 9000-9010:9000-9010 ghcr.io/stfbk/tlsassistant-testbed:v2.1.1
+```
+
+If you cannot use the released image, the next best option is to [build the Docker image locally](#2-build-the-docker-image-locally). Only [build and run on the host](#3-build-and-run-on-the-host) if Docker is not an option.
 
 ## Installation
 
-### One Liner
+### 1. Use the released Docker container (recommended)
+
+Pull and run the latest released image from GitHub Container Registry:
+
+```bash
+docker pull ghcr.io/stfbk/tlsassistant-testbed:v2.1.1
+docker run -p 9000-9010:9000-9010 ghcr.io/stfbk/tlsassistant-testbed:v2.1.1
+```
+
+### 2. Build the Docker image locally
+
+If you prefer to build the image yourself, clone the repository and use the provided `Dockerfile` (which runs `prepare.sh` automatically during the build).
+
+<details>
+<summary>Docker build and run tutorial</summary>
+
+Clone the repository:
+
+```bash
+git clone https://github.com/stfbk/tlsassistant-testbed && cd tlsassistant-testbed
+```
+
+Build the docker image:
+
+```bash
+docker build -t tlsassistant-testbed .
+```
+
+Run the docker image mapping all of the ports:
+
+```bash
+docker run -p 9000-9010:9000-9010 -t tlsassistant-testbed
+```
+
+</details>
+
+### 3. Build and run on the host
+
+#### One Liner
 
 To run the code, execute the following command:
 ```bash
 sudo apt update && sudo apt-get -y install git && git clone https://github.com/stfbk/tlsassistant-testbed && cd tlsassistant-testbed && chmod +x run.sh && sudo ./run.sh
 ```
 ---
-### Step by Step
+#### Step by Step
 If you want to download and install by executing every step:
 <details>
 
@@ -25,38 +74,19 @@ sudo apt update && sudo apt-get -y install git
 ```bash
 git clone https://github.com/stfbk/tlsassistant-testbed && cd tlsassistant-testbed
 ```
-2. Allow execution for the file:
+2. Allow execution for the files:
 ```bash
-chmod +x run.sh
+chmod +x prepare.sh run.sh
 ```
-3. Run the run.sh script:
+3. Build and prepare the web servers:
+```bash
+sudo ./prepare.sh
+```
+4. Execute the web servers:
 ```bash
 sudo ./run.sh
 ```
-</details>
 
-### Docker
-
-Recommended for non-Ubuntu users:
-
-Since it does use APT and install dependencies, we can use the Dockerfile to build the image and contain the installation process.
-
-<details>
-<summary>Docker build and run tutorial</summary>
-Clone the repository:
-
-```bash
-  git clone https://github.com/stfbk/tlsassistant-testbed && cd tlsassistant-testbed
-```
-Build the docker image:
-```bash
-  docker build -t tlsassistant-testbed .
-```
-Run the docker image mapping all of the ports:
-
-```bash
-  docker run -p 9000:9000 -p 9001:9001 -p 9002:9002 -p 9003:9003 -p 9004:9004 -p 9005:9005 -p 9006:9006 -p 9007:9007 -t tlsassistant-testbed
-```
 </details>
 
 ## Features
@@ -86,7 +116,7 @@ Run the docker image mapping all of the ports:
 - SSL RENEGOTIATION
 - ROBOT
 - SWEET32
- 
+  
 <!-- ######### - ALPACA ######## --> 
 <!-- ######### - RACCOON ####### --> 
 <!-- ######### - SLOTH ######### --> 
@@ -116,8 +146,8 @@ Run the docker image mapping all of the ports:
 
 - nginx 1.9.0 with openssl 1.0.1u
 - nginx 1.9.0 with openssl 1.0.1a with patched doc files
-- nginx 1.24 with openssl 3.0.12
-- DamnVulnerableOpenSSL Docker 
+- nginx 1.24.0 with openssl 3.0.12
+- DamnVulnerableOpenSSL (OpenSSL 1.0.2l) compiled into nginx 1.9.0
 - Apache httpd 2.4.37 patched with apr-1.6.5, apr-util-1.6.1 and using openssl 1.0.2-stable
 
 </details>
